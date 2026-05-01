@@ -1,134 +1,108 @@
+Skip to content
+DaniezOnSFUSD
+fnaf
+Repository navigation
+Code
+Issues
+Pull requests
+Agents
+Actions
+Projects
+Wiki
+Security and quality
+Insights
+Settings
+Files
+Go to file
+t
+T
+FNAF1.html
+FNAF2.html
+FNAF3.html
+fnaf
+/FNAF2.html
+ 
+
+Code
+
+Blame
+77 lines (70 loc) · 5.46 KB
 <!DOCTYPE html>
-JWheasley672 and DaniezonMC was here
-<html data-ruffle-optout>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Ruffle SWF Loader</title>
-        <link rel="stylesheet" href="https://daniezonsfusd.github.io/papas/swfloader/index.css">
-        <link rel="stylesheet" href="https://daniezonsfusd.github.io/papas/swfloader/lato.ft" />
-        <link rel="icon" href="https://https://daniezonsfusd.github.io/papas/swfloader/favicon-32.png" sizes="32x32">
-        <link rel="icon" href="https://daniezonsfusd.github.io/papas/swfloader/favicon-64.png" sizes="64x64">
-        <link rel="icon" href="https://daniezonsfusd.github.io/papas/swfloader/favicon-180.png" sizes="180x180">
-    </head>
-    <body>
-        <div id="nav">
-            <div id="title">
-                <a href="https://daniezonsfusd.github.io/papas/swfloader/index.html" target="_blank">
-                    <img
-                        src="https://daniezonsfusd.github.io/papas/swfloader/logo.png"
-                        alt="Ruffle"
-                        data-canonical-src="https://daniezonsfusd.github.io/papas/swfloader/logo.png" />
-                </a>
-            </div>
-                <div id="local-file-container">
-                    <span id="local-file-static-label">Local SWF:</span>
-                    <input type="file" accept=".swf,.spl" id="local-file"
-                        aria-describedby="local-file-static-label" />
-                    <label for="local-file" id="local-file-label">Select File</label>
-                    <span id="local-file-name">No file selected.</span>
-                </div>
-                <div id="sample-swfs-container" class="hidden">
-                    <span id="sample-swfs-label">Sample SWF:</span>
-                    <select id="sample-swfs" aria-describedby="sample-swfs-label">
-                    </select>
-                    <div id="author-container" class="hidden">
-                        <span>Author: </span><a href="#" target="_blank" id="author"></a>
-                    </div>
-                </div>
-                &emsp;
-                <svg width="20px" id="open-modal" viewBox="0 0 416.979 416.979"><path fill="white" d="M356.004 61.156c-81.37-81.47-213.377-81.551-294.848-.182-81.47 81.371-81.552 213.379-.181 294.85 81.369 81.47 213.378 81.551 294.849.181 81.469-81.369 81.551-213.379.18-294.849zM237.6 340.786a5.821 5.821 0 0 1-5.822 5.822h-46.576a5.821 5.821 0 0 1-5.822-5.822V167.885a5.821 5.821 0 0 1 5.822-5.822h46.576a5.82 5.82 0 0 1 5.822 5.822v172.901zm-29.11-202.885c-18.618 0-33.766-15.146-33.766-33.765 0-18.617 15.147-33.766 33.766-33.766s33.766 15.148 33.766 33.766c0 18.619-15.149 33.765-33.766 33.765z"/></g></svg>
-                &ensp;
-                <svg id="reload-swf" width="20px" viewBox="0 0 489.711 489.711"><path fill="white" d="M112.156 97.111c72.3-65.4 180.5-66.4 253.8-6.7l-58.1 2.2c-7.5.3-13.3 6.5-13 14 .3 7.3 6.3 13 13.5 13h.5l89.2-3.3c7.3-.3 13-6.2 13-13.5v-1.6l-3.3-88.2c-.3-7.5-6.6-13.3-14-13-7.5.3-13.3 6.5-13 14l2.1 55.3c-36.3-29.7-81-46.9-128.8-49.3-59.2-3-116.1 17.3-160 57.1-60.4 54.7-86 137.9-66.8 217.1 1.5 6.2 7 10.3 13.1 10.3 1.1 0 2.1-.1 3.2-.4 7.2-1.8 11.7-9.1 9.9-16.3-16.8-69.6 5.6-142.7 58.7-190.7zm350.3 98.4c-1.8-7.2-9.1-11.7-16.3-9.9-7.2 1.8-11.7 9.1-9.9 16.3 16.9 69.6-5.6 142.7-58.7 190.7-37.3 33.7-84.1 50.3-130.7 50.3-44.5 0-88.9-15.1-124.7-44.9l58.8-5.3c7.4-.7 12.9-7.2 12.2-14.7s-7.2-12.9-14.7-12.2l-88.9 8c-7.4.7-12.9 7.2-12.2 14.7l8 88.9c.6 7 6.5 12.3 13.4 12.3.4 0 .8 0 1.2-.1 7.4-.7 12.9-7.2 12.2-14.7l-4.8-54.1c36.3 29.4 80.8 46.5 128.3 48.9 3.8.2 7.6.3 11.3.3 55.1 0 107.5-20.2 148.7-57.4 60.4-54.7 86-137.8 66.8-217.1z"/></svg>
-            </div>
-        </div>
-        <div id="main" aria-label="">
-            <div id="overlay" class="hidden"></div>
-        </div>
-        <div id="metadata-modal" class="modal">
-            <div class="modal-content">
-                <span class="close" id="close-modal">×</span>
-                <table id="metadata">
-                    <tr>
-                        <td>Uncompressed Length</td>
-                        <td><span class="metadata" id="uncompressedLength">Loading</span></td>
-                    </tr>
-                    <tr>
-                        <td>SWF Version</td>
-                        <td><span class="metadata" id="swfVersion">Loading</span></td>
-                    </tr>
-                    <tr>
-                        <td>FP Version</td>
-                        <td><span class="metadata" id="flashVersion">Loading</span></td>
-                    </tr>
-                    <tr>
-                        <td>ActionScript 3</td>
-                        <td><span class="metadata" id="isActionScript3">Loading</span></td>
-                    </tr>
-                    <tr>
-                        <td>Total Frames</td>
-                        <td><span class="metadata" id="numFrames">Loading</span></td>
-                    </tr>
-                    <tr>
-                        <td>Frame Rate</td>
-                        <td><span class="metadata" id="frameRate">Loading</span></td>
-                    </tr>
-                    <tr>
-                        <td>SWF Width</td>
-                        <td><span class="metadata" id="width">Loading</span></td>
-                    </tr>
-                    <tr>
-                        <td>SWF Height</td>
-                        <td><span class="metadata" id="height">Loading</span></td>
-                    </tr>
-                    <tr>
-                        <td>SWF Background Color</td>
-                        <td><input class="metadata" type="color" id="backgroundColor" disabled value="#FFFFFF"></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <script>
-            function reloadRuffle(version) {
-                document.location.href = "?version=" + version;
-            }
-            function versionToDate(version) {
-                return version.split(".").slice(-3).map((el) => el.padStart(2, "0")).join("-");
-            }
-            function makeSelectVersion(versions) {
-                const versionDropdown = document.getElementById("ruffle-versions");
-                versions.forEach((version) => versionDropdown.add(new Option(versionToDate(version), version)));
-            }
-            const jsdelivrAPIURL = "https://data.jsdelivr.com/v1/package/npm/@ruffle-rs/ruffle";
-            fetch(jsdelivrAPIURL)
-            .then((response) => response.json())
-            .then((json) => makeSelectVersion(json['versions']));
-            const search = window.location.search;
-            const searchParams = new URLSearchParams(search);
-            const version = searchParams.get('version');
-            const cdn = document.createElement("script");
-            if (version) {
-                const cdnURL = "https://cdn.jsdelivr.net/npm/@ruffle-rs/ruffle@" + version;
-                fetch(cdnURL)
-                .then((response) => {
-                    if (response.ok) {
-                        cdn.setAttribute("src", cdnURL);
-                        document.getElementById("ruffle-versions").value = version;
-                    } else {
-                        cdn.setAttribute("src", "http://daniezonsfusd.github.io/papas/ruffle/ruffle.js");
-                    }
-                }).catch((error) => {
-                    cdn.setAttribute("src", "http://daniezonsfusd.github.io/papas/ruffle/ruffle.js");
-                });
-            } else {
-                    cdn.setAttribute("src", "http://daniezonsfusd.github.io/papas/ruffle/ruffle.js");
-            }
-            document.body.appendChild(cdn);
-            cdn.addEventListener("load", () => {
-                const indexJS = document.createElement("script");
-                indexJS.src = "index.js";
-                document.body.appendChild(indexJS);
-            });
-        </script>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>410 - Game Retired | DaniezOnSFUSD</title>
+    <style>
+        :root { --blurple: #5865F2; --soft-black: #1E1E22; --danger: #ED4245; --dark-gray: #2B2D31; }
+        body { margin: 0; background-color: var(--soft-black); color: white; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; text-align: center; }
+        
+        /* Glitch Effect for the 410 */
+        h1 { font-size: 8rem; color: var(--danger); margin: 0; position: relative; text-shadow: 2px 2px var(--blurple); }
+        h1::after { content: '410'; position: absolute; left: 2px; text-shadow: -2px 0 red; top: 0; color: white; background: var(--soft-black); overflow: hidden; clip: rect(0, 900px, 0, 0); animation: noise-anim 2s infinite linear alternate-reverse; }
+        @keyframes noise-anim { 0% { clip: rect(10px, 9999px, 40px, 0); } 100% { clip: rect(70px, 9999px, 90px, 0); } }
+
+        .container { max-width: 600px; padding: 20px; border: 2px solid var(--danger); background: rgba(237, 66, 69, 0.05); border-radius: 8px; }
+        .warning-tag { background: var(--danger); padding: 5px 15px; border-radius: 4px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        
+        p { color: #b9bbbe; line-height: 1.6; font-size: 1.1rem; margin-top: 20px; }
+        .sig { color: var(--blurple); font-weight: bold; display: block; margin-top: 15px; }
+        
+        .discord-btn { display: inline-block; background-color: var(--blurple); color: white; padding: 12px 25px; text-decoration: none; border-radius: 4px; font-weight: 600; margin-top: 20px; }
+        
+        /* Game Overlay */
+        #game-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); flex-direction: column; justify-content: center; align-items: center; z-index: 100; }
+        canvas { border: 4px solid var(--danger); background: #000; }
+        .snek-trigger { cursor: pointer; text-decoration: underline; color: var(--danger); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="warning-tag">System Alert: Deletion in Progress</span>
+        <h1>410</h1>
+        <h2>Game On The Chopping Block</h2>
+        <p>
+            This game has been put on the chopping block and will be removed! <br>
+            Sorry for the inconvenience!
+            <span class="sig">- DaniezOnSFUSD</span>
+        </p>
+        <p style="font-size: 0.9rem;">Still want to play something? Click the <span class="snek-trigger" onclick="toggleGame()">Snek</span> before it's gone too.</p>
+        <a href="https://discord.gg/V9nVwu836D" class="discord-btn">Find New Games on Discord</a>
+    </div>
+
+    <div id="game-overlay">
+        <canvas id="snekGame" width="400" height="400"></canvas>
+        <p style="color: white; margin-top: 15px;">ESC to exit. Be quick.</p>
+    </div>
+
+    <script>
+        // Logic remains same as previous versions to ensure the "Snek" and "Konami" easter eggs work!
+        const canvas = document.getElementById("snekGame"), ctx = canvas.getContext("2d"), box = 20;
+        let snake, food, direction, gameInterval;
+        function initGame() { snake = [{ x: 9 * box, y: 10 * box }]; food = { x: Math.floor(Math.random() * 19 + 1) * box, y: Math.floor(Math.random() * 19 + 1) * box }; direction = "RIGHT"; if(gameInterval) clearInterval(gameInterval); gameInterval = setInterval(draw, 100); }
+        function toggleGame() { document.getElementById("game-overlay").style.display = "flex"; initGame(); }
+        document.addEventListener("keydown", e => {
+            if(e.key === "Escape") document.getElementById("game-overlay").style.display = "none";
+            if(e.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
+            else if(e.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
+            else if(e.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
+            else if(e.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
+        });
+        function draw() {
+            ctx.fillStyle = "black"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            for(let i = 0; i < snake.length; i++) { ctx.fillStyle = (i === 0) ? "#ED4245" : "#ffffff"; ctx.fillRect(snake[i].x, snake[i].y, box, box); }
+            ctx.fillStyle = "#5865F2"; ctx.fillRect(food.x, food.y, box, box);
+            let snakeX = snake[0].x, snakeY = snake[0].y;
+            if(direction === "LEFT") snakeX -= box; else if(direction === "UP") snakeY -= box; else if(direction === "RIGHT") snakeX += box; else if(direction === "DOWN") snakeY += box;
+            if(snakeX === food.x && snakeY === food.y) food = { x: Math.floor(Math.random() * 19 + 1) * box, y: Math.floor(Math.random() * 19 + 1) * box }; else snake.pop();
+            let newHead = { x: snakeX, y: snakeY };
+            if(snakeX < 0 || snakeX >= canvas.width || snakeY < 0 || snakeY >= canvas.height || collision(newHead, snake)) { clearInterval(gameInterval); initGame(); }
+            snake.unshift(newHead);
+        }
+        function collision(head, array) { for(let i = 0; i < array.length; i++) if(head.x === array[i].x && head.y === array[i].y) return true; return false; }
+        let k = [], c = "ArrowUp,ArrowUp,ArrowDown,ArrowDown,ArrowLeft,ArrowRight,ArrowLeft,ArrowRight,b,a";
+        document.addEventListener("keydown", e => { k.push(e.key); if (k.toString().indexOf(c) >= 0) { toggleGame(); k = []; } });
+    </script>
+</body>
 </html>
+Manage cookies
+Do not share my personal information
