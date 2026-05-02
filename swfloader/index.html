@@ -4,26 +4,34 @@
     <meta charset="UTF-8">
     <title>410 - Game Retired | DaniezOnSFUSD</title>
     <style>
-        :root { --blurple: #5865F2; --soft-black: #1E1E22; --danger: #ED4245; --dark-gray: #2B2D31; }
+        :root { 
+            --blurple: #5865F2; --soft-black: #1E1E22; --danger: #ED4245; 
+            --neon-cyan: #00f2ff; --neon-pink: #ff00ff;
+        }
         body { margin: 0; background-color: var(--soft-black); color: white; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; text-align: center; }
         
-        /* Glitch Effect for the 410 */
+        .container { max-width: 600px; padding: 20px; border: 2px solid var(--danger); background: rgba(237, 66, 69, 0.05); border-radius: 8px; z-index: 1; }
+        
+        /* Glitch Effect */
         h1 { font-size: 8rem; color: var(--danger); margin: 0; position: relative; text-shadow: 2px 2px var(--blurple); }
         h1::after { content: '410'; position: absolute; left: 2px; text-shadow: -2px 0 red; top: 0; color: white; background: var(--soft-black); overflow: hidden; clip: rect(0, 900px, 0, 0); animation: noise-anim 2s infinite linear alternate-reverse; }
         @keyframes noise-anim { 0% { clip: rect(10px, 9999px, 40px, 0); } 100% { clip: rect(70px, 9999px, 90px, 0); } }
 
-        .container { max-width: 600px; padding: 20px; border: 2px solid var(--danger); background: rgba(237, 66, 69, 0.05); border-radius: 8px; }
         .warning-tag { background: var(--danger); padding: 5px 15px; border-radius: 4px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
-        
         p { color: #b9bbbe; line-height: 1.6; font-size: 1.1rem; margin-top: 20px; }
         .sig { color: var(--blurple); font-weight: bold; display: block; margin-top: 15px; }
         
-        .discord-btn { display: inline-block; background-color: var(--blurple); color: white; padding: 12px 25px; text-decoration: none; border-radius: 4px; font-weight: 600; margin-top: 20px; }
-        
-        /* Game Overlay */
+        /* GOD MODE OVERLAY */
         #game-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); flex-direction: column; justify-content: center; align-items: center; z-index: 100; }
-        canvas { border: 4px solid var(--danger); background: #000; }
-        .snek-trigger { cursor: pointer; text-decoration: underline; color: var(--danger); }
+        #stage-container { position: relative; border: 4px solid var(--danger); border-radius: 20px; overflow: hidden; background: #000; box-shadow: 0 0 50px rgba(237, 66, 69, 0.3); }
+        
+        .hud { position: absolute; inset: 0; pointer-events: none; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; font-family: monospace; }
+        .hud-top { display: flex; justify-content: space-between; font-weight: bold; font-size: 14px; }
+        .xp-rail { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; }
+        #xp-bar { height: 100%; width: 0%; background: var(--danger); transition: width 0.3s; }
+        
+        .snek-trigger { cursor: pointer; text-decoration: underline; color: var(--danger); font-weight: bold; }
+        #vfx { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%); background-size: 100% 4px; opacity: 0.2; }
     </style>
 </head>
 <body>
@@ -32,46 +40,98 @@
         <h1>410</h1>
         <h2>Game On The Chopping Block</h2>
         <p>
-            This game has been put on the chopping block and will be removed! <br>
+            This game has been retired and will be removed! <br>
             Sorry for the inconvenience!
             <span class="sig">- DaniezOnSFUSD</span>
         </p>
-        <p style="font-size: 0.9rem;">Still want to play something? Click the <span class="snek-trigger" onclick="toggleGame()">Snek</span> before it's gone too.</p>
-        <a href="https://discord.gg/V9nVwu836D" class="discord-btn">Find New Games on Discord</a>
+        <p style="font-size: 0.9rem;">Play the <span class="snek-trigger" onclick="Engine.boot()">Snek Core</span> before it's gone too.</p>
     </div>
 
     <div id="game-overlay">
-        <canvas id="snekGame" width="400" height="400"></canvas>
+        <div id="stage-container">
+            <div id="vfx"></div>
+            <canvas id="mainCanvas" width="600" height="400"></canvas>
+            <div class="hud">
+                <div class="hud-top">
+                    <div style="color:var(--danger)">STATUS: DELETING...</div>
+                    <div style="color:var(--neon-pink)">COMBO: <span id="txt-combo">X1</span></div>
+                </div>
+                <div class="xp-rail"><div id="xp-bar"></div></div>
+            </div>
+        </div>
         <p style="color: white; margin-top: 15px;">ESC to exit. Be quick.</p>
     </div>
 
-    <script>
-        // Logic remains same as previous versions to ensure the "Snek" and "Konami" easter eggs work!
-        const canvas = document.getElementById("snekGame"), ctx = canvas.getContext("2d"), box = 20;
-        let snake, food, direction, gameInterval;
-        function initGame() { snake = [{ x: 9 * box, y: 10 * box }]; food = { x: Math.floor(Math.random() * 19 + 1) * box, y: Math.floor(Math.random() * 19 + 1) * box }; direction = "RIGHT"; if(gameInterval) clearInterval(gameInterval); gameInterval = setInterval(draw, 100); }
-        function toggleGame() { document.getElementById("game-overlay").style.display = "flex"; initGame(); }
-        document.addEventListener("keydown", e => {
-            if(e.key === "Escape") document.getElementById("game-overlay").style.display = "none";
-            if(e.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
-            else if(e.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
-            else if(e.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
-            else if(e.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
-        });
-        function draw() {
-            ctx.fillStyle = "black"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            for(let i = 0; i < snake.length; i++) { ctx.fillStyle = (i === 0) ? "#ED4245" : "#ffffff"; ctx.fillRect(snake[i].x, snake[i].y, box, box); }
-            ctx.fillStyle = "#5865F2"; ctx.fillRect(food.x, food.y, box, box);
-            let snakeX = snake[0].x, snakeY = snake[0].y;
-            if(direction === "LEFT") snakeX -= box; else if(direction === "UP") snakeY -= box; else if(direction === "RIGHT") snakeX += box; else if(direction === "DOWN") snakeY += box;
-            if(snakeX === food.x && snakeY === food.y) food = { x: Math.floor(Math.random() * 19 + 1) * box, y: Math.floor(Math.random() * 19 + 1) * box }; else snake.pop();
-            let newHead = { x: snakeX, y: snakeY };
-            if(snakeX < 0 || snakeX >= canvas.width || snakeY < 0 || snakeY >= canvas.height || collision(newHead, snake)) { clearInterval(gameInterval); initGame(); }
-            snake.unshift(newHead);
+<script>
+const Engine = {
+    canvas: document.getElementById('mainCanvas'),
+    ctx: document.getElementById('mainCanvas').getContext('2d'),
+    grid: 20, active: false, speed: 100, xp: 0, combo: 1,
+    snake: [], food: [], dir: {x:1, y:0}, next: {x:1, y:0},
+
+    boot() {
+        document.getElementById('game-overlay').style.display = 'flex';
+        this.active = true; this.xp = 0; this.combo = 1; this.speed = 100;
+        this.snake = [{x: 10, y: 10}, {x: 9, y: 10}, {x: 8, y: 10}];
+        this.dir = {x:1, y:0}; this.next = {x:1, y:0};
+        this.spawn(); this.loop();
+    },
+
+    spawn() { this.food = [{ x: Math.floor(Math.random() * 29), y: Math.floor(Math.random() * 19), hue: Math.random() * 360 }]; },
+
+    update() {
+        this.dir = this.next;
+        const head = { x: this.snake[0].x + this.dir.x, y: this.snake[0].y + this.dir.y };
+
+        if (head.x < 0) head.x = 29; if (head.x >= 30) head.x = 0;
+        if (head.y < 0) head.y = 19; if (head.y >= 20) head.y = 0;
+
+        if (this.snake.some(s => s.x === head.x && s.y === head.y)) {
+            this.active = false; setTimeout(() => this.boot(), 1000); return;
         }
-        function collision(head, array) { for(let i = 0; i < array.length; i++) if(head.x === array[i].x && head.y === array[i].y) return true; return false; }
-        let k = [], c = "ArrowUp,ArrowUp,ArrowDown,ArrowDown,ArrowLeft,ArrowRight,ArrowLeft,ArrowRight,b,a";
-        document.addEventListener("keydown", e => { k.push(e.key); if (k.toString().indexOf(c) >= 0) { toggleGame(); k = []; } });
-    </script>
+
+        this.snake.unshift(head);
+        if(head.x === this.food[0].x && head.y === this.food[0].y) {
+            this.xp += 20; this.combo++; this.spawn();
+            this.speed = Math.max(50, this.speed - 2);
+        } else { this.snake.pop(); }
+        
+        document.getElementById('xp-bar').style.width = this.xp + "%";
+        document.getElementById('txt-combo').innerText = "X" + this.combo;
+    },
+
+    draw() {
+        this.ctx.fillStyle = "#000";
+        this.ctx.fillRect(0, 0, 600, 400);
+        
+        const f = this.food[0];
+        this.ctx.fillStyle = `hsl(${f.hue}, 100%, 50%)`;
+        this.ctx.shadowBlur = 15;
+        this.ctx.beginPath(); this.ctx.arc(f.x*20+10, f.y*20+10, 8, 0, Math.PI*2); this.ctx.fill();
+
+        this.snake.forEach((s, i) => {
+            this.ctx.fillStyle = `hsl(${(Date.now()/10 + i*15) % 360}, 80%, 60%)`;
+            this.ctx.shadowBlur = i === 0 ? 20 : 0;
+            this.ctx.fillRect(s.x*20+2, s.y*20+2, 16, 16);
+        });
+        this.ctx.shadowBlur = 0;
+    },
+
+    loop() {
+        if(!this.active) return;
+        this.update(); this.draw();
+        setTimeout(() => requestAnimationFrame(() => this.loop()), this.speed);
+    }
+};
+
+window.addEventListener("keydown", e => {
+    if(e.key === "Escape") { Engine.active = false; document.getElementById('game-overlay').style.display = 'none'; }
+    const d = Engine.dir;
+    if(e.key === "ArrowUp" && d.y === 0) Engine.next = {x:0, y:-1};
+    if(e.key === "ArrowDown" && d.y === 0) Engine.next = {x:0, y:1};
+    if(e.key === "ArrowLeft" && d.x === 0) Engine.next = {x:-1, y:0};
+    if(e.key === "ArrowRight" && d.x === 0) Engine.next = {x:1, y:0};
+});
+</script>
 </body>
 </html>
